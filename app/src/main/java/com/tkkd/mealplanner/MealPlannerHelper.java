@@ -12,7 +12,7 @@ public class MealPlannerHelper extends SQLiteOpenHelper {
 
     private static final String AT_HOME = "AT_HOME";
     private static final String INGREDIENTS = "INGREDIENTS";
-    private static final String MEASURES = "MEASURE";
+    static final String MEASURES = "MEASURE";
 
     MealPlannerHelper(Context context){
         super(context,DB_NAME,null,DB_VERSION);
@@ -52,7 +52,7 @@ public class MealPlannerHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insertMeasure(SQLiteDatabase sqLiteDatabase, String mesName){
+    private void insertMeasure(SQLiteDatabase sqLiteDatabase, String mesName){
         ContentValues contentValues = new ContentValues();
         contentValues.put("measure_name",mesName);
         sqLiteDatabase.insert(MEASURES,null,contentValues);
