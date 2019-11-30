@@ -1,5 +1,6 @@
 package com.tkkd.mealplanner;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,9 +10,9 @@ public class MealPlannerHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "meal_planner";
     private static final int DB_VERSION = 1;
 
-    public static final String AT_HOME = "AT_HOME";
-    public static final String INGREDIENTS = "INGREDIENTS";
-    public static final String MEASURES = "MEASURE";
+    private static final String AT_HOME = "AT_HOME";
+    private static final String INGREDIENTS = "INGREDIENTS";
+    private static final String MEASURES = "MEASURE";
 
     MealPlannerHelper(Context context){
         super(context,DB_NAME,null,DB_VERSION);
@@ -43,10 +44,17 @@ public class MealPlannerHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(create_tab_measures);
         sqLiteDatabase.execSQL(create_tab_ingredients);
         sqLiteDatabase.execSQL(create_tab_at_home);
+        insertMeasure(sqLiteDatabase,"Test");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
+    }
+
+    public void insertMeasure(SQLiteDatabase sqLiteDatabase, String mesName){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("measure_name",mesName);
+        sqLiteDatabase.insert(MEASURES,null,contentValues);
     }
 }
