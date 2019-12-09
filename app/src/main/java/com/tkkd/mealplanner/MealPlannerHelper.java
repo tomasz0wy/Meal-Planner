@@ -12,8 +12,8 @@ public class MealPlannerHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
 
     //Tables names
-    private static final String AT_HOME = "AT_HOME";
-    private static final String INGREDIENTS = "INGREDIENTS";
+    static final String AT_HOME = "AT_HOME";
+    static final String INGREDIENTS = "INGREDIENTS";
     static final String MEASURES = "MEASURE";
 
     //Class constructor
