@@ -54,7 +54,16 @@ public class MealPlannerHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(create_tab_at_home);
 
         //Populate "Measure" table with data
-        insertMeasure(sqLiteDatabase,"Test");
+        insertMeasure(sqLiteDatabase,"Kg");
+        insertMeasure(sqLiteDatabase,"L");
+        insertMeasure(sqLiteDatabase,"Ml");
+
+        insertIngredients(sqLiteDatabase,"Milk",2);
+        insertIngredients(sqLiteDatabase,"Water",3);
+        insertIngredients(sqLiteDatabase,"Potatoes",1);
+
+        insertAtHome(sqLiteDatabase,1,2);
+        insertAtHome(sqLiteDatabase,3,5);
     }
 
     //Update of existing databse
@@ -68,5 +77,21 @@ public class MealPlannerHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("measure_name",mesName);
         sqLiteDatabase.insert(MEASURES,null,contentValues);
+    }
+
+    //Method adding data to "Measure" table
+    private void insertIngredients(SQLiteDatabase sqLiteDatabase, String ingName, int mesId){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name",ingName);
+        contentValues.put("measures_id",mesId);
+        sqLiteDatabase.insert(INGREDIENTS,null,contentValues);
+    }
+
+    //Method adding data to "Measure" table
+    private void insertAtHome(SQLiteDatabase sqLiteDatabase, int ingId, int quantity){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ingredients_id",ingId);
+        contentValues.put("quantity",quantity);
+        sqLiteDatabase.insert(AT_HOME,null,contentValues);
     }
 }
