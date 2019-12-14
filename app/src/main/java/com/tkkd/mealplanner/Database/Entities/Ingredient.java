@@ -3,9 +3,11 @@ package com.tkkd.mealplanner.Database.Entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "ingredient")
+@Entity(tableName = "ingredient",
+foreignKeys = @ForeignKey(entity = Measure.class,parentColumns = "id",childColumns = "measure_id"))
 public class Ingredient {
 
     @PrimaryKey(autoGenerate = true)

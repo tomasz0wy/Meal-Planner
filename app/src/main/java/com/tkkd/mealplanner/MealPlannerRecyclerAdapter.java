@@ -8,29 +8,30 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tkkd.mealplanner.Database.DAO.HomeDAO;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MealPlannerRecyclerAdapter extends RecyclerView.Adapter<MealPlannerRecyclerAdapter.ViewHolder> {
-    String[] test1;
-    String[] test2;
-    String[] test3;
+    private List<HomeDAO.ATHome> ATHomeList;
 
     class ViewHolder extends RecyclerView.ViewHolder{
         private LinearLayout linearLayout;
 
-        public ViewHolder(LinearLayout linearLayout){
+        ViewHolder(LinearLayout linearLayout){
             super(linearLayout);
             this.linearLayout = linearLayout;
         }
     }
 
-    public MealPlannerRecyclerAdapter(String[] number, String[] name,String[] quantity){
-        test1 = number;
-        test2 = name;
-        test3 = quantity;
+    MealPlannerRecyclerAdapter(List<HomeDAO.ATHome> list){
+        this.ATHomeList = list;
     }
 
     @Override
     public int getItemCount() {
-        return test1.length;
+        return this.ATHomeList.size();
     }
 
     @NonNull
@@ -46,10 +47,12 @@ public class MealPlannerRecyclerAdapter extends RecyclerView.Adapter<MealPlanner
         LinearLayout linearLayout = holder.linearLayout;
         TextView number = linearLayout.findViewById(R.id.number_text_view);
         TextView name = linearLayout.findViewById(R.id.name_text_view);
-        TextView expiry = linearLayout.findViewById(R.id.expiry_text_view);
+        TextView measure = linearLayout.findViewById(R.id.measure_text_view);
+        TextView quantity = linearLayout.findViewById(R.id.quantity_text_view);
 
-        number.setText(test1[position]);
-        name.setText(test2[position]);
-        expiry.setText(test3[position]);
+        number.setText(Integer.toString(position+1));
+        name.setText(ATHomeList.get(position).ingName);
+        measure.setText(ATHomeList.get(position).measure);
+        quantity.setText(Integer.toString(ATHomeList.get(position).quantity));
     }
 }

@@ -12,16 +12,16 @@ import java.util.List;
 public interface HomeDAO {
 
     @Insert
-    public void insertHome(Home... homes);
+    void insertHome(Home... homes);
 
     @Query("" +
             "SELECT ingredient.ingredient_name AS ingName, measures.measure_name AS measure, at_home.quantity AS quantity " +
             "FROM at_home " +
             "INNER JOIN ingredient ON at_home.ingredient_id = ingredient.id " +
             "INNER JOIN measures ON ingredient.measure_id = measures.id")
-    public List<ATHome> getATHome();
+    List<ATHome> getATHome();
 
-    static class ATHome{
+    class ATHome{
         public String ingName;
         public String measure;
         public int quantity;

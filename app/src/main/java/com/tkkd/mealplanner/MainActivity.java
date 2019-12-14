@@ -1,6 +1,7 @@
 package com.tkkd.mealplanner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
@@ -22,6 +23,8 @@ import com.tkkd.mealplanner.Database.Entities.Ingredient;
 import com.tkkd.mealplanner.Database.Entities.Measure;
 import com.tkkd.mealplanner.Database.Inserts;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -37,12 +40,33 @@ public class MainActivity extends AppCompatActivity {
                 .allowMainThreadQueries().fallbackToDestructiveMigration().build();
 
         SharedPreferences preferences = getSharedPreferences("Opener", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        HomeDAO homeDAO = database.getHomeDAO();
+        MeasureDAO measureDAO = database.getMeasureDAO();
+        IngredientDAO ingredientDAO = database.getIngredientDAO();
 
         if(preferences.getInt("IfOpen",0) == 0){
-            Inserts.insertMeasure(database,"kg");
-            Inserts.insertIngredient(database,"ziemniaki",0);
+            Inserts.insertMeasure(database,"kg","g","L");
+            Inserts.insertIngredient(database,"ziemniaki",1);
+            Inserts.insertIngredient(database,"mleko",3);
+            Inserts.insertHome(database,1,5);
+            Inserts.insertHome(database,2,3);
+            Inserts.insertHome(database,1,6);
 
-            preferences.edit().putInt("IfOpen",0);
+            List<Measure> test1 = measureDAO.getMeasures();
+            List<Ingredient> test2 = ingredientDAO.getIngredients();
+
+            editor.putInt("IfOpen",1);
+            editor.apply();
         }
+
+        List<HomeDAO.ATHome> data = homeDAO.getATHome();
+
+        recyclerView = findViewById(R.id.recycler_test);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        mAdapter = new MealPlannerRecyclerAdapter(data);
+        recyclerView.setAdapter(mAdapter);
     }
 }
