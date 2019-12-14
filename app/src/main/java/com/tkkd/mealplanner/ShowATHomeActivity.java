@@ -39,10 +39,6 @@ public class ShowATHomeActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("Opener", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
-        HomeDAO homeDAO = database.getHomeDAO();
-        MeasureDAO measureDAO = database.getMeasureDAO();
-        IngredientDAO ingredientDAO = database.getIngredientDAO();
-
         if(preferences.getInt("IfOpen",0) == 0){
             Inserts.insertMeasure(database,"kg","g","L");
             Inserts.insertIngredient(database,"ziemniaki",1);
@@ -51,19 +47,14 @@ public class ShowATHomeActivity extends AppCompatActivity {
             Inserts.insertHome(database,2,3);
             Inserts.insertHome(database,1,6);
 
-            List<Measure> test1 = measureDAO.getMeasures();
-            List<Ingredient> test2 = ingredientDAO.getIngredients();
-
             editor.putInt("IfOpen",1);
             editor.apply();
         }
 
-        List<HomeDAO.ATHome> data = homeDAO.getATHome();
-
         recyclerView = findViewById(R.id.recycler_test);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MealPlannerRecyclerAdapter(data);
+        mAdapter = new MealPlannerRecyclerAdapter(database.getHomeDAO().getATHome());
         recyclerView.setAdapter(mAdapter);
 
         FloatingActionButton fab = findViewById(R.id.fabAddATHome);
