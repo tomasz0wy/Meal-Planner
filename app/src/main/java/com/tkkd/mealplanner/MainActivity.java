@@ -6,14 +6,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tkkd.mealplanner.Database.AppDatabase;
 import com.tkkd.mealplanner.Database.DAO.HomeDAO;
 import com.tkkd.mealplanner.Database.DAO.IngredientDAO;
@@ -22,6 +25,8 @@ import com.tkkd.mealplanner.Database.Entities.Home;
 import com.tkkd.mealplanner.Database.Entities.Ingredient;
 import com.tkkd.mealplanner.Database.Entities.Measure;
 import com.tkkd.mealplanner.Database.Inserts;
+import com.tkkd.mealplanner.MealPlannerRecyclerAdapter;
+import com.tkkd.mealplanner.R;
 
 import java.util.List;
 
@@ -68,5 +73,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new MealPlannerRecyclerAdapter(data);
         recyclerView.setAdapter(mAdapter);
+
+        FloatingActionButton fab = findViewById(R.id.fabAddATHome);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,AddATHomeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

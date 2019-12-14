@@ -4,13 +4,9 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.tkkd.mealplanner.Database.DAO.HomeDAO;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class MealPlannerRecyclerAdapter extends RecyclerView.Adapter<MealPlannerRecyclerAdapter.ViewHolder> {
