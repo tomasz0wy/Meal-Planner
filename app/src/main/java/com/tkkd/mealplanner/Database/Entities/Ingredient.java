@@ -11,7 +11,6 @@ foreignKeys = @ForeignKey(entity = Measure.class,parentColumns = "id",childColum
 public class Ingredient {
 
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     public long id;
 
     @ColumnInfo(name = "ingredient_name")
@@ -19,4 +18,9 @@ public class Ingredient {
 
     @ColumnInfo(name = "measure_id")
     public long mesId;
+
+    @NonNull
+    public String toString(){
+        return ingName.substring(0,1).toUpperCase() + ingName.substring(1);
+    }
 }

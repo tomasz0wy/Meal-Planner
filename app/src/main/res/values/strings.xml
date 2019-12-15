@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Meal Planner</string>
+    <string name="minus_icon">Minus Icon</string>
+    <string name="plus_icon">Plus Icon</string>
+    <string name="add_button">Add</string>
 </resources>

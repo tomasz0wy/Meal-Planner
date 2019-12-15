@@ -27,13 +27,14 @@ public class ShowATHomeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_athome);
 
-        AppDatabase database = Room.databaseBuilder(this,AppDatabase.class,"MealPlanner")
+        database = Room.databaseBuilder(this,AppDatabase.class,"MealPlanner")
                 .allowMainThreadQueries().fallbackToDestructiveMigration().build();
 
         SharedPreferences preferences = getSharedPreferences("Opener", Context.MODE_PRIVATE);
@@ -65,5 +66,12 @@ public class ShowATHomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mAdapter = new MealPlannerRecyclerAdapter(database.getHomeDAO().getATHome());
+        recyclerView.setAdapter(mAdapter);
     }
 }
