@@ -4,9 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "ingredient",
+@Entity(indices = @Index("measure_id"),tableName = "ingredient",
 foreignKeys = @ForeignKey(entity = Measure.class,parentColumns = "id",childColumns = "measure_id"))
 public class Ingredient {
 
@@ -18,6 +19,9 @@ public class Ingredient {
 
     @ColumnInfo(name = "measure_id")
     public long mesId;
+
+    @ColumnInfo(name = "expiration_time",defaultValue = "0")
+    public int expTime;
 
     @NonNull
     public String toString(){

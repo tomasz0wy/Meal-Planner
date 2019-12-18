@@ -7,7 +7,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.tkkd.mealplanner.Database.DAO.HomeDAO;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MealPlannerRecyclerAdapter extends RecyclerView.Adapter<MealPlannerRecyclerAdapter.ViewHolder> {
     private List<HomeDAO.ATHome> ATHomeList;
@@ -41,14 +45,20 @@ public class MealPlannerRecyclerAdapter extends RecyclerView.Adapter<MealPlanner
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         LinearLayout linearLayout = holder.linearLayout;
+        Date insertDate = new Date();
+        insertDate.setTime(ATHomeList.get(position).insertTime + (ATHomeList.get(position).expTime)*86400000);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM",Locale.US);
+        String ingredient = ATHomeList.get(position).ingName.substring(0,1).toUpperCase() + ATHomeList.get(position).ingName.substring(1);
         TextView number = linearLayout.findViewById(R.id.number_text_view);
         TextView name = linearLayout.findViewById(R.id.name_text_view);
         TextView measure = linearLayout.findViewById(R.id.measure_text_view);
         TextView quantity = linearLayout.findViewById(R.id.quantity_text_view);
+        TextView expTime = linearLayout.findViewById(R.id.exp_time_text_view);
 
-        number.setText(Integer.toString(position+1));
-        name.setText(ATHomeList.get(position).ingName);
+        number.setText(String.format(Locale.US,"%d",position+1));
+        name.setText(ingredient);
         measure.setText(ATHomeList.get(position).measure);
-        quantity.setText(Integer.toString(ATHomeList.get(position).quantity));
+        quantity.setText(String.format(Locale.US,"%d",ATHomeList.get(position).quantity));
+        expTime.setText(sdf.format(insertDate));
     }
 }

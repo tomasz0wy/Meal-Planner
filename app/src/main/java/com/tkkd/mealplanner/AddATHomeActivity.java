@@ -15,6 +15,7 @@ import com.tkkd.mealplanner.Database.AppDatabase;
 import com.tkkd.mealplanner.Database.DAO.HomeDAO;
 import com.tkkd.mealplanner.Database.Entities.Home;
 import com.tkkd.mealplanner.Database.Entities.Ingredient;
+import com.tkkd.mealplanner.Database.Inserts;
 
 import java.util.Locale;
 
@@ -65,11 +66,7 @@ public class AddATHomeActivity extends AppCompatActivity {
 
     public void insert(View view) {
         Ingredient ingredient = (Ingredient) spinner.getSelectedItem();
-        HomeDAO homeDAO = database.getHomeDAO();
-        Home home = new Home();
-        home.ingId = ingredient.id;
-        home.quantity = quantity;
-        homeDAO.insertHome(home);
+        Inserts.insertHome(database,ingredient.id,this.quantity);
         finish();
     }
 }

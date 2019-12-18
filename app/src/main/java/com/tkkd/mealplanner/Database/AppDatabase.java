@@ -2,7 +2,6 @@ package com.tkkd.mealplanner.Database;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
-
 import com.tkkd.mealplanner.Database.DAO.HomeDAO;
 import com.tkkd.mealplanner.Database.DAO.IngredientDAO;
 import com.tkkd.mealplanner.Database.DAO.MeasureDAO;

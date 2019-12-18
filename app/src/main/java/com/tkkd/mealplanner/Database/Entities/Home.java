@@ -11,11 +11,13 @@ import androidx.room.PrimaryKey;
 public class Home {
 
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     public long id;
 
     public int quantity;
 
     @ColumnInfo(name = "ingredient_id")
     public long ingId;
+
+    @ColumnInfo(name = "inserted_at")
+    public long insertTime;
 }

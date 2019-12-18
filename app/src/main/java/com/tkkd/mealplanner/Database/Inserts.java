@@ -7,13 +7,15 @@ import com.tkkd.mealplanner.Database.Entities.Home;
 import com.tkkd.mealplanner.Database.Entities.Ingredient;
 import com.tkkd.mealplanner.Database.Entities.Measure;
 
+import java.util.Date;
+
 public class Inserts {
     public static void insertMeasure(AppDatabase database,String... name){
         MeasureDAO measureDAO = database.getMeasureDAO();
 
-        for(int i=0;i<name.length;i++){
+        for (String oneName : name) {
             Measure measure = new Measure();
-            measure.mesName = name[i];
+            measure.mesName = oneName;
             measureDAO.insertMeasure(measure);
         }
     }
@@ -26,11 +28,21 @@ public class Inserts {
         ingredientDAO.insertIngredient(ingredient);
     }
 
+    public static void insertIngredient(AppDatabase database, String ingName, long mesID,int expTime){
+        IngredientDAO ingredientDAO = database.getIngredientDAO();
+        Ingredient ingredient = new Ingredient();
+        ingredient.ingName = ingName;
+        ingredient.mesId = mesID;
+        ingredient.expTime = expTime;
+        ingredientDAO.insertIngredient(ingredient);
+    }
+
     public static void insertHome(AppDatabase database, long ingId, int quantity){
         HomeDAO homeDAO = database.getHomeDAO();
         Home home = new Home();
         home.ingId = ingId;
         home.quantity = quantity;
+        home.insertTime = new Date().getTime();
         homeDAO.insertHome(home);
     }
 }

@@ -42,7 +42,7 @@ public class ShowATHomeActivity extends AppCompatActivity {
 
         if(preferences.getInt("IfOpen",0) == 0){
             Inserts.insertMeasure(database,"kg","g","L");
-            Inserts.insertIngredient(database,"ziemniaki",1);
+            Inserts.insertIngredient(database,"ziemniaki",1,7);
             Inserts.insertIngredient(database,"mleko",3);
             Inserts.insertHome(database,1,5);
             Inserts.insertHome(database,2,3);

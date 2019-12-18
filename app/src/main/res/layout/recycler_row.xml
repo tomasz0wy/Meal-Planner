@@ -16,13 +16,19 @@
         android:layout_weight="1"/>
 
     <TextView
+        android:id="@+id/quantity_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <TextView
         android:id="@+id/measure_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
     <TextView
-        android:id="@+id/quantity_text_view"
+        android:id="@+id/exp_time_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>

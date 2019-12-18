@@ -3,4 +3,9 @@
     <string name="minus_icon">Minus Icon</string>
     <string name="plus_icon">Plus Icon</string>
     <string name="add_button">Add</string>
+    <string name="id_title">Id</string>
+    <string name="name_title">Name</string>
+    <string name="quantity_title">Quantity</string>
+    <string name="measure_title">Measure</string>
+    <string name="expiration_title">Expiration Date</string>
 </resources>
