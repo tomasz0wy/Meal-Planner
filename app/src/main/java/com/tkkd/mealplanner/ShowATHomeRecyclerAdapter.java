@@ -7,13 +7,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.tkkd.mealplanner.Database.DAO.HomeDAO;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class MealPlannerRecyclerAdapter extends RecyclerView.Adapter<MealPlannerRecyclerAdapter.ViewHolder> {
+public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRecyclerAdapter.ViewHolder> {
     private List<HomeDAO.ATHome> ATHomeList;
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -25,7 +24,7 @@ public class MealPlannerRecyclerAdapter extends RecyclerView.Adapter<MealPlanner
         }
     }
 
-    MealPlannerRecyclerAdapter(List<HomeDAO.ATHome> list){
+    ShowATHomeRecyclerAdapter(List<HomeDAO.ATHome> list){
         this.ATHomeList = list;
     }
 

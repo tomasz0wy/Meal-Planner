@@ -4,23 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tkkd.mealplanner.Database.AppDatabase;
-import com.tkkd.mealplanner.Database.DAO.HomeDAO;
-import com.tkkd.mealplanner.Database.DAO.IngredientDAO;
-import com.tkkd.mealplanner.Database.DAO.MeasureDAO;
-import com.tkkd.mealplanner.Database.Entities.Ingredient;
-import com.tkkd.mealplanner.Database.Entities.Measure;
 import com.tkkd.mealplanner.Database.Inserts;
-
-import java.util.List;
 
 public class ShowATHomeActivity extends AppCompatActivity {
 
@@ -41,13 +32,7 @@ public class ShowATHomeActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
 
         if(preferences.getInt("IfOpen",0) == 0){
-            Inserts.insertMeasure(database,"kg","g","L");
-            Inserts.insertIngredient(database,"ziemniaki",1,7);
-            Inserts.insertIngredient(database,"mleko",3);
-            Inserts.insertHome(database,1,5);
-            Inserts.insertHome(database,2,3);
-            Inserts.insertHome(database,1,6);
-
+            Inserts.populateDatabase(database);
             editor.putInt("IfOpen",1);
             editor.apply();
         }
@@ -55,7 +40,7 @@ public class ShowATHomeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_test);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MealPlannerRecyclerAdapter(database.getHomeDAO().getATHome());
+        mAdapter = new ShowATHomeRecyclerAdapter(database.getHomeDAO().getATHome());
         recyclerView.setAdapter(mAdapter);
 
         FloatingActionButton fab = findViewById(R.id.fabAddATHome);
@@ -71,7 +56,7 @@ public class ShowATHomeActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        mAdapter = new MealPlannerRecyclerAdapter(database.getHomeDAO().getATHome());
+        mAdapter = new ShowATHomeRecyclerAdapter(database.getHomeDAO().getATHome());
         recyclerView.setAdapter(mAdapter);
     }
 }

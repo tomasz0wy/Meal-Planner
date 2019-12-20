@@ -2,21 +2,15 @@ package com.tkkd.mealplanner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.tkkd.mealplanner.Database.AppDatabase;
-import com.tkkd.mealplanner.Database.DAO.HomeDAO;
-import com.tkkd.mealplanner.Database.Entities.Home;
 import com.tkkd.mealplanner.Database.Entities.Ingredient;
 import com.tkkd.mealplanner.Database.Inserts;
-
 import java.util.Locale;
 
 public class AddATHomeActivity extends AppCompatActivity {

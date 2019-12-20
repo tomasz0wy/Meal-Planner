@@ -9,8 +9,9 @@ import com.tkkd.mealplanner.Database.Entities.Measure;
 
 import java.util.Date;
 
+//Dla Klaudii, żony mojej kochanej najbardziej na świecie najlepszej lepszej nie znajdę
 public class Inserts {
-    public static void insertMeasure(AppDatabase database,String... name){
+    private static void insertMeasure(AppDatabase database,String... name){
         MeasureDAO measureDAO = database.getMeasureDAO();
 
         for (String oneName : name) {
@@ -44,5 +45,14 @@ public class Inserts {
         home.quantity = quantity;
         home.insertTime = new Date().getTime();
         homeDAO.insertHome(home);
+    }
+
+    public static void populateDatabase(AppDatabase database){
+        insertMeasure(database,"kg","g","L");
+        insertIngredient(database,"ziemniaki",1,7);
+        insertIngredient(database,"mleko",3);
+        insertHome(database,1,5);
+        insertHome(database,2,3);
+        insertHome(database,1,6);
     }
 }
