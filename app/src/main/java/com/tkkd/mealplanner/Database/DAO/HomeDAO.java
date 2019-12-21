@@ -20,6 +20,9 @@ public interface HomeDAO {
             "INNER JOIN measures ON ingredient.measure_id = measures.id")
     List<ATHome> getATHome();
 
+    @Query("DELETE FROM at_home WHERE quantity = :quantity AND inserted_at = :insertTime AND ingredient_id = :ingId")
+    void deleteATHome(int quantity, long insertTime, long ingId);
+
     class ATHome{
         public String ingName;
         public String measure;

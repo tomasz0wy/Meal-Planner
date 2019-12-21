@@ -40,7 +40,7 @@ public class ShowATHomeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_test);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new ShowATHomeRecyclerAdapter(database.getHomeDAO().getATHome());
+        mAdapter = new ShowATHomeRecyclerAdapter(database.getHomeDAO().getATHome(),database);
         recyclerView.setAdapter(mAdapter);
 
         FloatingActionButton fab = findViewById(R.id.fabAddATHome);
@@ -56,7 +56,7 @@ public class ShowATHomeActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        mAdapter = new ShowATHomeRecyclerAdapter(database.getHomeDAO().getATHome());
+        mAdapter = new ShowATHomeRecyclerAdapter(database.getHomeDAO().getATHome(),database);
         recyclerView.setAdapter(mAdapter);
     }
 }

@@ -14,4 +14,7 @@ public interface IngredientDAO {
 
     @Query("SELECT * FROM ingredient")
     List<Ingredient> getIngredients();
+
+    @Query("SELECT * FROM ingredient WHERE ingredient_name = :ingName")
+    Ingredient getOneIngredient(String ingName);
 }

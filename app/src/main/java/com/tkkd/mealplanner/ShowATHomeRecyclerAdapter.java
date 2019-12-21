@@ -1,12 +1,20 @@
 package com.tkkd.mealplanner;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.tkkd.mealplanner.Database.AppDatabase;
 import com.tkkd.mealplanner.Database.DAO.HomeDAO;
+import com.tkkd.mealplanner.Database.Entities.Ingredient;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +22,7 @@ import java.util.Locale;
 
 public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRecyclerAdapter.ViewHolder> {
     private List<HomeDAO.ATHome> ATHomeList;
+    private AppDatabase database;
 
     class ViewHolder extends RecyclerView.ViewHolder{
         private LinearLayout linearLayout;
@@ -24,8 +33,9 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
         }
     }
 
-    ShowATHomeRecyclerAdapter(List<HomeDAO.ATHome> list){
+    ShowATHomeRecyclerAdapter(List<HomeDAO.ATHome> list,AppDatabase database){
         this.ATHomeList = list;
+        this.database = database;
     }
 
     @Override
@@ -42,8 +52,8 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        LinearLayout linearLayout = holder.linearLayout;
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        final LinearLayout linearLayout = holder.linearLayout;
         Date insertDate = new Date();
         insertDate.setTime(ATHomeList.get(position).insertTime + (ATHomeList.get(position).expTime)*86400000);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM",Locale.US);
@@ -53,11 +63,22 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
         TextView measure = linearLayout.findViewById(R.id.measure_text_view);
         TextView quantity = linearLayout.findViewById(R.id.quantity_text_view);
         TextView expTime = linearLayout.findViewById(R.id.exp_time_text_view);
+        Button del = linearLayout.findViewById(R.id.delete_button);
 
         number.setText(String.format(Locale.US,"%d",position+1));
         name.setText(ingredient);
         measure.setText(ATHomeList.get(position).measure);
         quantity.setText(String.format(Locale.US,"%d",ATHomeList.get(position).quantity));
         expTime.setText(sdf.format(insertDate));
+        del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                long ingIndex = database.getIngredientDAO().getOneIngredient(ATHomeList.get(position).ingName).id;
+                Toast.makeText(linearLayout.getContext(),"Test delete",Toast.LENGTH_LONG).show();
+                database.getHomeDAO().deleteATHome(ATHomeList.get(position).quantity, ATHomeList.get(position).insertTime,ingIndex);
+                ATHomeList.remove(position);
+                notifyDataSetChanged();
+            }
+        });
     }
 }
