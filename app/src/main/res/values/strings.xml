@@ -8,4 +8,6 @@
     <string name="quantity_title">Quantity</string>
     <string name="measure_title">Measure</string>
     <string name="expiration_title">Expiration Date</string>
+    <string name="delete_icon">Delete Icon</string>
+    <string name="edit_icon">Edit Icon</string>
 </resources>

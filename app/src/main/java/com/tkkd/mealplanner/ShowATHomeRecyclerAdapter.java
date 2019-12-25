@@ -1,9 +1,11 @@
 package com.tkkd.mealplanner;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,22 +56,42 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final LinearLayout linearLayout = holder.linearLayout;
-        Date insertDate = new Date();
-        insertDate.setTime(ATHomeList.get(position).insertTime + (ATHomeList.get(position).expTime)*86400000);
+
+        //Create date
+        Date expDate = new Date();
+        long expTimeLong = ATHomeList.get(position).insertTime + (ATHomeList.get(position).expTime)*86400000;
+        expDate.setTime(expTimeLong);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM",Locale.US);
         String ingredient = ATHomeList.get(position).ingName.substring(0,1).toUpperCase() + ATHomeList.get(position).ingName.substring(1);
+
+        //Get rows' objects
         TextView number = linearLayout.findViewById(R.id.number_text_view);
         TextView name = linearLayout.findViewById(R.id.name_text_view);
         TextView measure = linearLayout.findViewById(R.id.measure_text_view);
         TextView quantity = linearLayout.findViewById(R.id.quantity_text_view);
         TextView expTime = linearLayout.findViewById(R.id.exp_time_text_view);
-        Button del = linearLayout.findViewById(R.id.delete_button);
+        ImageButton del = linearLayout.findViewById(R.id.delete_button);
+        View color = linearLayout.findViewById(R.id.color_rect);
 
+        double colorPicker = (expTimeLong - (new Date().getTime()))/86400000;
+
+        //Set objects' display
         number.setText(String.format(Locale.US,"%d",position+1));
         name.setText(ingredient);
         measure.setText(ATHomeList.get(position).measure);
         quantity.setText(String.format(Locale.US,"%d",ATHomeList.get(position).quantity));
-        expTime.setText(sdf.format(insertDate));
+        expTime.setText(sdf.format(expDate));
+
+        if(colorPicker < 3){
+            color.setBackgroundColor(Color.RED);
+        }
+        else if(colorPicker < 6){
+            color.setBackgroundColor(Color.YELLOW);
+        }
+        else{
+            color.setBackgroundColor(Color.GREEN);
+        }
+
         del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
