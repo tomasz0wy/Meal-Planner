@@ -14,4 +14,7 @@ public interface MeasureDAO {
 
     @Query("SELECT * FROM measures")
     List<Measure> getMeasures();
+
+    @Query("SELECT * FROM measures WHERE measure_name = :mesName")
+    Measure getOneMeasure(String mesName);
 }

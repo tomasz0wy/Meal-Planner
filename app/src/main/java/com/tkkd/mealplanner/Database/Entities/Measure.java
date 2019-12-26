@@ -9,9 +9,13 @@ import androidx.room.PrimaryKey;
 public class Measure {
 
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     public long id;
 
     @ColumnInfo(name = "measure_name")
     public String mesName;
+
+    @NonNull
+    public String toString(){
+        return mesName;
+    }
 }

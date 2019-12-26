@@ -55,7 +55,19 @@
             android:inputType="date"
             android:maxLength="8"/>
 
+        <CheckBox
+            android:id="@+id/is_new_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="show"/>
+
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"/>
 
     <Button
         android:layout_width="wrap_content"
