@@ -4,19 +4,15 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.tkkd.mealplanner.Database.AppDatabase;
 import com.tkkd.mealplanner.Database.DAO.HomeDAO;
-import com.tkkd.mealplanner.Database.Entities.Ingredient;
-
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -56,12 +52,28 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final LinearLayout linearLayout = holder.linearLayout;
-
-        //Create date
+        long expTimeLong;
+        String dateString;
         Date expDate = new Date();
-        long expTimeLong = ATHomeList.get(position).insertTime + (ATHomeList.get(position).expTime)*86400000;
-        expDate.setTime(expTimeLong);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM",Locale.US);
+        SimpleDateFormat sdf;
+
+        if(ATHomeList.get(position).expTime.equals("")){
+            expTimeLong = ATHomeList.get(position).insertTime + 7*86400000;
+            expDate.setTime(expTimeLong);
+        }else{
+            dateString = ATHomeList.get(position).expTime;
+            try {
+                Date date = new SimpleDateFormat("dd/MM/yy",Locale.US).parse(dateString);
+                expDate.setTime(date.getTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        if (expDate.getYear() == new Date().getYear()) {
+            sdf = new SimpleDateFormat("dd/MM",Locale.US);
+        } else {
+            sdf = new SimpleDateFormat("MM/yyyy",Locale.US);
+        }
         String ingredient = ATHomeList.get(position).ingName.substring(0,1).toUpperCase() + ATHomeList.get(position).ingName.substring(1);
 
         //Get rows' objects
@@ -73,7 +85,7 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
         ImageButton del = linearLayout.findViewById(R.id.delete_button);
         View color = linearLayout.findViewById(R.id.color_rect);
 
-        double colorPicker = (expTimeLong - (new Date().getTime()))/86400000;
+        double colorPicker = (expDate.getTime() - (new Date().getTime()))/86400000;
 
         //Set objects' display
         number.setText(String.format(Locale.US,"%d",position+1));
@@ -82,7 +94,7 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
         quantity.setText(String.format(Locale.US,"%d",ATHomeList.get(position).quantity));
         expTime.setText(sdf.format(expDate));
 
-        if(colorPicker < 3){
+        if(colorPicker < 2){
             color.setBackgroundColor(Color.RED);
         }
         else if(colorPicker < 6){

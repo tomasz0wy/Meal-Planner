@@ -10,4 +10,7 @@
     <string name="expiration_title">Expiration Date</string>
     <string name="delete_icon">Delete Icon</string>
     <string name="edit_icon">Edit Icon</string>
+    <string name="expiration_hint">dd/mm/yy</string>
+    <string name="ing_hint">Ingredient name</string>
+    <string name="quan_hint">0</string>
 </resources>

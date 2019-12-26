@@ -20,9 +20,6 @@ public class Ingredient {
     @ColumnInfo(name = "measure_id")
     public long mesId;
 
-    @ColumnInfo(name = "expiration_time",defaultValue = "0")
-    public int expTime;
-
     @NonNull
     public String toString(){
         return ingName.substring(0,1).toUpperCase() + ingName.substring(1);
