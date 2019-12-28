@@ -16,41 +16,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:paddingEnd="16dp"/>
 
         <TextView
             android:id="@+id/name_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/quantity_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:layout_marginEnd="4dp"/>
 
         <TextView
             android:id="@+id/measure_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/exp_time_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:gravity="end" />
 
         <View
             android:id="@+id/color_rect"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"/>
 
         <ImageButton
             android:id="@+id/delete_button"
@@ -59,7 +64,8 @@
             android:layout_gravity="center_vertical"
             android:background="#FFF"
             android:contentDescription="@string/delete_icon"
-            android:src="@drawable/delete"/>
+            android:src="@drawable/delete"
+            android:layout_marginStart="16dp"/>
 
     </LinearLayout>
 

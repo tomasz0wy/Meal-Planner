@@ -91,7 +91,7 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
         number.setText(String.format(Locale.US,"%d",position+1));
         name.setText(ingredient);
         measure.setText(ATHomeList.get(position).measure);
-        quantity.setText(String.format(Locale.US,"%d",ATHomeList.get(position).quantity));
+        quantity.setText(String.format(Locale.US,"%.1f",ATHomeList.get(position).quantity));
         expTime.setText(sdf.format(expDate));
 
         if(colorPicker < 2){
@@ -112,6 +112,7 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
                 database.getHomeDAO().deleteATHome(ATHomeList.get(position).quantity, ATHomeList.get(position).insertTime,ingIndex);
                 ATHomeList.remove(position);
                 notifyDataSetChanged();
+                ShowATHomeActivity.isEmpty();
             }
         });
     }

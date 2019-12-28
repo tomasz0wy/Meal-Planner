@@ -28,7 +28,7 @@ public class Inserts {
         ingredientDAO.insertIngredient(ingredient);
     }
 
-    public static void insertHome(AppDatabase database, long ingId, int quantity, String expTime){
+    public static void insertHome(AppDatabase database, long ingId, float quantity, String expTime){
         HomeDAO homeDAO = database.getHomeDAO();
         Home home = new Home();
         home.ingId = ingId;
@@ -46,7 +46,7 @@ public class Inserts {
         insertIngredient(database,"lemons",1);
         insertIngredient(database,"milk",4);
         insertHome(database,1,5,"29/12/19");
-        insertHome(database,2,3,"29/12/19");
-        insertHome(database,1,6,"29/12/19");
+        insertHome(database,2,3,"30/11/20");
+        insertHome(database,1,6,"29/11/20");
     }
 }

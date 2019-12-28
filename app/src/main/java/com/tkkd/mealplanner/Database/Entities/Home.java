@@ -13,7 +13,7 @@ public class Home {
     @PrimaryKey(autoGenerate = true)
     public long id;
 
-    public int quantity;
+    public float quantity;
 
     @ColumnInfo(name = "ingredient_id")
     public long ingId;
