@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,12 +14,11 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tkkd.mealplanner.Database.AppDatabase;
 import com.tkkd.mealplanner.Database.DAO.HomeDAO;
+import com.tkkd.mealplanner.Database.Entities.Recipe;
 import com.tkkd.mealplanner.Database.Inserts;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class ShowATHomeActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private static RecyclerView.Adapter mAdapter;
+    @SuppressLint("StaticFieldLeak")
     private static TextView message;
     private RecyclerView.LayoutManager layoutManager;
     private AppDatabase database;

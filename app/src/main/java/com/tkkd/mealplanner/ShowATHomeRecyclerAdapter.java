@@ -45,7 +45,7 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.recycler_row,parent,false);
+                R.layout.at_home_recycler_row,parent,false);
         return new ViewHolder(linearLayout);
     }
 
@@ -64,6 +64,7 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
             dateString = ATHomeList.get(position).expTime;
             try {
                 Date date = new SimpleDateFormat("dd/MM/yy",Locale.US).parse(dateString);
+                assert date != null;
                 expDate.setTime(date.getTime());
             } catch (ParseException e) {
                 e.printStackTrace();

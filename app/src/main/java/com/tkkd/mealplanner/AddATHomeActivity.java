@@ -2,6 +2,8 @@ package com.tkkd.mealplanner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -127,5 +129,10 @@ public class AddATHomeActivity extends AppCompatActivity {
         }else {
             linearLayout.removeAllViews();
         }
+    }
+
+    public void change(View view) {
+        Intent intent = new Intent(AddATHomeActivity.this, RecipeListActivity.class);
+        startActivity(intent);
     }
 }

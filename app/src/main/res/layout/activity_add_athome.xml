@@ -48,7 +48,8 @@
             android:layout_gravity="center_vertical"
             android:paddingTop="4dp"
             android:layout_margin="8dp"
-            android:hint="@string/quan_hint"/>
+            android:hint="@string/quan_hint"
+            android:importantForAutofill="no"/>
 
         <Button
             android:id="@+id/button2"
@@ -66,7 +67,8 @@
             android:hint="@string/expiration_hint"
             android:inputType="date"
             android:maxLength="8"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:importantForAutofill="no"/>
 
     </LinearLayout>
 
@@ -99,5 +101,10 @@
         android:text="@string/add_button"
         android:layout_gravity="center"
         android:onClick="insert"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="change"/>
 
 </LinearLayout>
