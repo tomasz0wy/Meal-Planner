@@ -1,6 +1,8 @@
 package com.tkkd.mealplanner;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,17 +37,25 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
 
     @NonNull
     @Override
-    public RecipeListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecipeListAdapter.ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
         LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.recipe_recycler_row,parent,false);
         return new ViewHolder(linearLayout);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecipeListAdapter.ViewHolder holder, final int position) {
         final LinearLayout linearLayout = holder.linearLayout;
         TextView textView = linearLayout.findViewById(R.id.recipe_name);
 
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(linearLayout.getContext(),SingleRecipeActivity.class);
+                intent.putExtra(SingleRecipeActivity.INTENT_RECIPE,data.get(position).id);
+                linearLayout.getContext().startActivity(intent);
+            }
+        });
         textView.setText(data.get(position).recName);
     }
 }

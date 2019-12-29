@@ -16,4 +16,7 @@ public interface RecipeDAO {
 
     @Query("SELECT * FROM recipe")
     List<Recipe> getRecipes();
+
+    @Query("SELECT * FROM recipe WHERE id = :recId")
+    Recipe getOneRecipe(long recId);
 }

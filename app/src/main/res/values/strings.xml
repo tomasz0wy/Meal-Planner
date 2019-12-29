@@ -23,4 +23,7 @@
     <string name="minus_1">-1</string>
     <string name="plus_1">+1</string>
     <string name="is_it_new">Is it new?</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="instructions">Instructions</string>
+    <string name="recipes_list">Recipes List</string>
 </resources>

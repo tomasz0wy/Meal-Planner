@@ -14,6 +14,6 @@ public interface IngredientListDAO {
     @Insert
     void insertList(IngredientListForRecipe... ingredientListForRecipes);
 
-    @Query("SELECT ingredient_for_recipe_id FROM ing_recipe_ref WHERE recipe_id = :recipeId")
-    List<Long> getIngList(long recipeId);
+    @Query("SELECT * FROM ing_recipe_ref WHERE recipe_id = :recipeId")
+    List<IngredientListForRecipe> getIngList(long recipeId);
 }

@@ -14,4 +14,6 @@ public class Recipe {
     public String recName;
 
     public String description;
+
+    public String instructions;
 }

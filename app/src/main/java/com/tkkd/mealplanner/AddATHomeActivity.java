@@ -130,9 +130,4 @@ public class AddATHomeActivity extends AppCompatActivity {
             linearLayout.removeAllViews();
         }
     }
-
-    public void change(View view) {
-        Intent intent = new Intent(AddATHomeActivity.this, RecipeListActivity.class);
-        startActivity(intent);
-    }
 }
