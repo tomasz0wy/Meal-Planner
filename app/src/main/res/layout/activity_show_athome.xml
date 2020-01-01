@@ -63,12 +63,20 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/recipe_list_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:onClick="recipeList"
+            android:text="@string/recipes_list" />
+
+        <Button
+            android:id="@+id/shop_list_intent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/recipes_list"
-            android:onClick="recipeList"/>
+            android:text="@string/shopping_list"
+            android:onClick="shoppingList"/>
 
         <ToggleButton
             android:id="@+id/sort_button"

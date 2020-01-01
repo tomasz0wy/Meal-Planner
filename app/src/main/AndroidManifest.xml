@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".SingleRecipeActivity"/>
+        <activity android:name=".ShoppingListActivity"/>
+        <activity android:name=".SingleRecipeActivity" />
         <activity android:name=".RecipeListActivity" />
         <activity
             android:name=".AddATHomeActivity"

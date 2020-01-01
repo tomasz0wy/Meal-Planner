@@ -6,14 +6,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.tkkd.mealplanner.Database.AppDatabase;
 import com.tkkd.mealplanner.Database.DAO.IngredientListDAO;
 import com.tkkd.mealplanner.Database.DAO.RecipeDAO;
 import com.tkkd.mealplanner.Database.Entities.IngredientListForRecipe;
 import com.tkkd.mealplanner.Database.Entities.Recipe;
 import com.tkkd.mealplanner.Database.Entities.ShoppingList;
-
+import com.tkkd.mealplanner.Database.Inserts;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,17 +55,23 @@ public class SingleRecipeActivity extends AppCompatActivity {
         TextView recipeDescription = findViewById(R.id.recipe_description);
         TextView instructionList = findViewById(R.id.instruction_list);
 
+        recipeName.setText(recipe.recName);
+        recipeDescription.setText(recipe.description);
+        instructionList.setText(recipe.instructions);
+
         tinyDB = new TinyDB(this);
 
         ArrayList<Object> tempList = tinyDB.getListObject("toInsert", ShoppingList.class);
         for(Object o : tempList){
             toInsert.add((ShoppingList) o);
         }
+    }
 
-        toInsert.size();
-
-        recipeName.setText(recipe.recName);
-        recipeDescription.setText(recipe.description);
-        instructionList.setText(recipe.instructions);
+    public void add(View view) {
+        for(int i = 0; i < toInsert.size();i++){
+            ShoppingList shoppingList = toInsert.get(i);
+            Inserts.insertShoppingList(database,shoppingList.ingredientId,shoppingList.mesId,shoppingList.quantityShop);
+        }
+        Toast.makeText(this,"Added to shopping list",Toast.LENGTH_LONG).show();
     }
 }

@@ -94,8 +94,14 @@ public class SingleRecipeRecyclerAdapter extends RecyclerView.Adapter<SingleReci
         if(!isInHome){
             ShoppingList shoppingList = new ShoppingList();
             shoppingList.ingredientId = data.get(position).ingredientId;
-            shoppingList.quantityShop = data.get(position).quantity;
-            shoppingList.mesId = measure.id;
+
+            String afterConversion = MeasureConverter.convert(data.get(position).quantity,measure.mesName);
+            shoppingList.quantityShop = (int) Math.floor(Float.valueOf(afterConversion.substring(0,afterConversion.length()-2)));
+
+            String afterConversionMes = afterConversion.substring(afterConversion.length()-2);
+            Measure toInsertMes = database.getMeasureDAO().getOneMeasure(afterConversionMes.trim());
+            shoppingList.mesId = toInsertMes.id;
+
             if(!shopList.contains(shoppingList)){
                 shopList.add(shoppingList);
             }

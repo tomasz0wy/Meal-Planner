@@ -137,4 +137,9 @@ public class ShowATHomeActivity extends AppCompatActivity {
         Intent intent = new Intent(ShowATHomeActivity.this, RecipeListActivity.class);
         startActivity(intent);
     }
+
+    public void shoppingList(View view) {
+        Intent intent = new Intent(ShowATHomeActivity.this,ShoppingListActivity.class);
+        startActivity(intent);
+    }
 }

@@ -5,11 +5,13 @@ import com.tkkd.mealplanner.Database.DAO.IngredientDAO;
 import com.tkkd.mealplanner.Database.DAO.IngredientListDAO;
 import com.tkkd.mealplanner.Database.DAO.MeasureDAO;
 import com.tkkd.mealplanner.Database.DAO.RecipeDAO;
+import com.tkkd.mealplanner.Database.DAO.ShoppingListDAO;
 import com.tkkd.mealplanner.Database.Entities.Home;
 import com.tkkd.mealplanner.Database.Entities.Ingredient;
 import com.tkkd.mealplanner.Database.Entities.IngredientListForRecipe;
 import com.tkkd.mealplanner.Database.Entities.Measure;
 import com.tkkd.mealplanner.Database.Entities.Recipe;
+import com.tkkd.mealplanner.Database.Entities.ShoppingList;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,6 +65,15 @@ public class Inserts {
         ingredientListForRecipe.quantity = quantity;
         ingredientListForRecipe.mesId = mesId;
         ingredientListDAO.insertList(ingredientListForRecipe);
+    }
+
+    public static void insertShoppingList(AppDatabase database, long ingId, long mesId, int quantity){
+        ShoppingListDAO shoppingListDAO = database.getShoppingListDAO();
+        ShoppingList shoppingList = new ShoppingList();
+        shoppingList.ingredientId = ingId;
+        shoppingList.mesId = mesId;
+        shoppingList.quantityShop = quantity;
+        shoppingListDAO.insertShopList(shoppingList);
     }
 
     public static void populateDatabase(AppDatabase database){
