@@ -126,12 +126,7 @@ public class SingleRecipeRecyclerAdapter extends RecyclerView.Adapter<SingleReci
             }
         }
         if(position == getItemCount()-1){
-            TinyDB tinyDB = new TinyDB(linearLayout.getContext());
-            ArrayList<Object> shopListObjects = new ArrayList<>();
-
-            shopListObjects.addAll(shopList);
-
-            tinyDB.putListObject("toInsert",shopListObjects);
+            SingleRecipeActivity.toInsert = shopList;
         }
     }
 

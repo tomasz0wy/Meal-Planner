@@ -109,7 +109,9 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
             @Override
             public void onClick(View view) {
                 long ingIndex = database.getIngredientDAO().getOneIngredient(ATHomeList.get(position).ingName).id;
-                Toast.makeText(linearLayout.getContext(),"Test delete",Toast.LENGTH_LONG).show();
+                String ingName = database.getIngredientDAO().getOneIngredient(ATHomeList.get(position).ingName).ingName;
+                ingName = ingName.substring(0,1).toUpperCase() + ingName.substring(1);
+                Toast.makeText(linearLayout.getContext(),ingName + " deleted",Toast.LENGTH_LONG).show();
                 database.getHomeDAO().deleteATHome(ATHomeList.get(position).quantity, ATHomeList.get(position).insertTime,ingIndex);
                 ATHomeList.remove(position);
                 notifyDataSetChanged();

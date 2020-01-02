@@ -23,8 +23,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
     public static final String INTENT_RECIPE = "key";
 
-    private List<ShoppingList> toInsert = new ArrayList<>();
-    private TinyDB tinyDB;
+    public static List<ShoppingList> toInsert = new ArrayList<>();
     private AppDatabase database;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -51,13 +50,6 @@ public class SingleRecipeActivity extends AppCompatActivity {
         mAdapter = new SingleRecipeRecyclerAdapter(ingredientListForRecipe,database);
         recyclerView.setAdapter(mAdapter);
 
-        tinyDB = new TinyDB(this);
-
-        ArrayList<Object> tempList = tinyDB.getListObject("toInsert", ShoppingList.class);
-        for(Object o : tempList){
-            toInsert.add((ShoppingList) o);
-        }
-
         TextView recipeName = findViewById(R.id.recipe_name);
         TextView recipeDescription = findViewById(R.id.recipe_description);
         TextView instructionList = findViewById(R.id.instruction_list);
@@ -65,8 +57,6 @@ public class SingleRecipeActivity extends AppCompatActivity {
         recipeName.setText(recipe.recName);
         recipeDescription.setText(recipe.description);
         instructionList.setText(recipe.instructions);
-
-
     }
 
     public void add(View view) {
