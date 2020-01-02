@@ -435,7 +435,7 @@ public class TinyDB {
      */
     public void putString(String key, String value) {
     	checkForNullKey(key); checkForNullValue(value);
-        preferences.edit().putString(key, value).apply();
+        preferences.edit().putString(key, value).commit();
     }
 
     /**
@@ -446,7 +446,7 @@ public class TinyDB {
     public void putListString(String key, ArrayList<String> stringList) {
     	checkForNullKey(key);
         String[] myStringList = stringList.toArray(new String[stringList.size()]);
-        preferences.edit().putString(key, TextUtils.join("‚‗‚", myStringList)).apply();
+        preferences.edit().putString(key, TextUtils.join("‚‗‚", myStringList)).commit();
     }
 
     /**
@@ -456,7 +456,7 @@ public class TinyDB {
      */
     public void putBoolean(String key, boolean value) {
     	checkForNullKey(key);
-        preferences.edit().putBoolean(key, value).apply();
+        preferences.edit().putBoolean(key, value).commit();
     }
 
     /**
@@ -505,7 +505,7 @@ public class TinyDB {
      * @param key SharedPreferences key
      */
     public void remove(String key) {
-        preferences.edit().remove(key).apply();
+        preferences.edit().remove(key).commit();
     }
 
     /**
@@ -522,7 +522,7 @@ public class TinyDB {
      * Clear SharedPreferences (remove everything)
      */
     public void clear() {
-        preferences.edit().clear().apply();
+        preferences.edit().clear().commit();
     }
 
     /**
