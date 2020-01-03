@@ -6,22 +6,19 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.tkkd.mealplanner.Database.AppDatabase;
 import com.tkkd.mealplanner.Database.Entities.Ingredient;
 import com.tkkd.mealplanner.Database.Entities.Measure;
 import com.tkkd.mealplanner.Database.Entities.ShoppingList;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingListRecyclerAdapter.ViewHolder> {
 
     private List<ShoppingList> data;
-    private List<ShoppingList> toInsertList = new ArrayList<>();
+    static List<ShoppingList> toInsertList = new ArrayList<>();
     private AppDatabase database;
 
     class ViewHolder extends RecyclerView.ViewHolder{

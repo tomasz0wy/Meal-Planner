@@ -23,4 +23,7 @@ public class Home {
 
     @ColumnInfo(name = "expiration_time")
     public String expTime;
+
+    @ColumnInfo(name = "measure_id")
+    public long mesId;
 }

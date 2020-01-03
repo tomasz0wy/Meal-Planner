@@ -5,8 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 import android.os.Bundle;
+import android.view.View;
+
 import com.tkkd.mealplanner.Database.AppDatabase;
 import com.tkkd.mealplanner.Database.Entities.ShoppingList;
+import com.tkkd.mealplanner.Database.Inserts;
+
 import java.util.List;
 
 public class ShoppingListActivity extends AppCompatActivity {
@@ -16,6 +20,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private AppDatabase database;
     private List<ShoppingList> data;
+    private List<ShoppingList> toInsert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,5 +44,18 @@ public class ShoppingListActivity extends AppCompatActivity {
         super.onRestart();
         mAdapter = new ShoppingListRecyclerAdapter(data,database);
         recyclerView.setAdapter(mAdapter);
+    }
+
+    public void endShop(View view) {
+        toInsert = ShoppingListRecyclerAdapter.toInsertList;
+        for (int i = 0; i < toInsert.size();i++){
+            ShoppingList list = toInsert.get(i);
+            Inserts.insertHome(database,list.ingredientId,list.quantityShop,"29/12/19",list.mesId);
+            database.getShoppingListDAO().removeList(list);
+        }
+        data = database.getShoppingListDAO().getShopList();
+        mAdapter = new ShoppingListRecyclerAdapter(data,database);
+        recyclerView.setAdapter(mAdapter);
+        ShoppingListRecyclerAdapter.toInsertList.clear();
     }
 }

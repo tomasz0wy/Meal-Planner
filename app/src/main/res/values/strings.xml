@@ -19,7 +19,7 @@
         the red button on the bottom right to add new product.</string>
     <string name="title_img_in_home">In home</string>
     <string name="title_img_ing">In home</string>
-    <string name="choose_def_meas">Choose default measure</string>
+    <string name="choose_def_meas">Choose measure</string>
     <string name="minus_1">-1</string>
     <string name="plus_1">+1</string>
     <string name="is_it_new">Is it new?</string>
@@ -28,4 +28,5 @@
     <string name="recipes_list">Recipes List</string>
     <string name="add_to_shop">Add missing ingredients to shopping list</string>
     <string name="shopping_list">Shopping list</string>
+    <string name="end_shopping">End shopping</string>
 </resources>

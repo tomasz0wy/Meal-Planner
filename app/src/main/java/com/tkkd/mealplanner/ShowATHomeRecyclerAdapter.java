@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.tkkd.mealplanner.Database.AppDatabase;
 import com.tkkd.mealplanner.Database.DAO.HomeDAO;
+import com.tkkd.mealplanner.Database.Entities.Measure;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -56,6 +58,7 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
         String dateString;
         Date expDate = new Date();
         SimpleDateFormat sdf;
+        Measure aTHomeMeasure = database.getMeasureDAO().getOneMeasureById(ATHomeList.get(position).measure);
 
         if(ATHomeList.get(position).expTime.equals("")){
             expTimeLong = ATHomeList.get(position).insertTime + 7*86400000;
@@ -86,19 +89,26 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
         ImageButton del = linearLayout.findViewById(R.id.delete_button);
         View color = linearLayout.findViewById(R.id.color_rect);
 
-        double colorPicker = (expDate.getTime() - (new Date().getTime()))/86400000;
+        long test = expDate.getTime();
+        long test2 = new Date().getTime();
+
+        long colorPicker = (test - test2);
 
         //Set objects' display
         number.setText(String.format(Locale.US,"%d",position+1));
         name.setText(ingredient);
-        measure.setText(ATHomeList.get(position).measure);
+        measure.setText(aTHomeMeasure.mesName);
         quantity.setText(String.format(Locale.US,"%.1f",ATHomeList.get(position).quantity));
         expTime.setText(sdf.format(expDate));
 
-        if(colorPicker < 2){
+
+        if(colorPicker <= -86400000){
+            color.setBackgroundColor(Color.BLACK);
+        }
+        else if(colorPicker < (2*86400000)){
             color.setBackgroundColor(Color.RED);
         }
-        else if(colorPicker < 6){
+        else if(colorPicker < (6*86400000)){
             color.setBackgroundColor(Color.YELLOW);
         }
         else{

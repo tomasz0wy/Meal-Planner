@@ -2,7 +2,7 @@ package com.tkkd.mealplanner;
 
 class MeasureConverter {
 
-    static String convert(float value, String mesName){
+    static String convertToSmaller(float value, String mesName){
         if(mesName.equals("l") || mesName.equals("tbsp") || mesName.equals("ml") || mesName.equals("cup")){
             return convertToMl(value, mesName);
         }else if(mesName.equals("kg") || mesName.equals("g") || mesName.equals("tsp")){

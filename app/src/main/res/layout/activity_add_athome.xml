@@ -81,17 +81,21 @@
             android:id="@+id/is_new_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="show"
             android:text="@string/is_it_new"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="16dp"/>
 
-        <LinearLayout
-            android:id="@+id/placeholder"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1"/>
+            android:text="@string/choose_def_meas"
+            android:layout_gravity="center_vertical"/>
+
+        <Spinner
+            android:id="@+id/measure_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"/>
 
     </LinearLayout>
 

@@ -6,6 +6,7 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -53,6 +54,19 @@ public class AddATHomeActivity extends AppCompatActivity {
         ArrayAdapter<Ingredient> ingredients = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,database.getIngredientDAO().getIngredients());
         autoTextView.setAdapter(ingredients);
+
+        spinner = findViewById(R.id.measure_spinner);
+        List<Measure> measureList = database.getMeasureDAO().getMeasures();
+        ArrayAdapter<Measure> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,measureList);
+        spinner.setAdapter(arrayAdapter);
+
+        autoTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Ingredient ingredient = (Ingredient) adapterView.getItemAtPosition(i);
+                spinner.setSelection((int)ingredient.mesId - 1);
+            }
+        });
         checkBox = findViewById(R.id.is_new_checkbox);
     }
 
@@ -82,6 +96,13 @@ public class AddATHomeActivity extends AppCompatActivity {
     public void insert(View view){
         String ingredientName = autoTextView.getText().toString().toLowerCase();
         float quantityTaken = Float.valueOf(textView.getText().toString());
+        Measure beforeMeasure = (Measure) spinner.getSelectedItem();
+        String beforeMeasureName = beforeMeasure.mesName;
+
+        String afterConversion = MeasureConverter.convertToSmaller(quantityTaken,beforeMeasureName);
+        int afterConversionInt = (int) Math.floor(Float.valueOf(afterConversion.substring(0,afterConversion.length()-2)));
+        Measure afterMeasure = database.getMeasureDAO().getOneMeasure(afterConversion.substring(afterConversion.length()-2).trim());
+
         if(ingredientName.equals("")){
             Toast.makeText(this,"Add the ingredient name",Toast.LENGTH_LONG).show();
         }else{
@@ -92,42 +113,16 @@ public class AddATHomeActivity extends AppCompatActivity {
                 expDate = new SimpleDateFormat("dd/MM/yy",Locale.US).format(dateToSet);
             }
             if(checkBox.isChecked()){
-                String mesName = spinner.getSelectedItem().toString();
-                Inserts.insertIngredient(database,ingredientName, database.getMeasureDAO().getOneMeasure(mesName).id);
+                Inserts.insertIngredient(database,ingredientName, database.getMeasureDAO().getOneMeasure(beforeMeasureName).id);
             }
             Ingredient ingredient = database.getIngredientDAO().getOneIngredient(ingredientName);
 
             if(ingredient == null){
                 Toast.makeText(this,"No such ingredient in database",Toast.LENGTH_LONG).show();
             }else{
-                Inserts.insertHome(database,ingredient.id,quantityTaken,expDate);
+                Inserts.insertHome(database,ingredient.id,afterConversionInt,expDate,afterMeasure.id);
                 finish();
             }
-        }
-    }
-
-    public void show(View view) {
-        LinearLayout linearLayout = findViewById(R.id.placeholder);
-        if(checkBox.isChecked()){
-            TextView spinnerPrompt = new TextView(this);
-            spinnerPrompt.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            spinnerPrompt.setText(R.string.choose_def_meas);
-            spinner = new Spinner(this);
-            spinner.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            linearLayout.addView(spinnerPrompt);
-            linearLayout.addView(spinner);
-            List<Measure> measureList = database.getMeasureDAO().getMeasures();
-            ArrayAdapter<Measure> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,measureList);
-            spinner.setAdapter(arrayAdapter);
-            spinner.setSelection(1);
-        }else {
-            linearLayout.removeAllViews();
         }
     }
 }

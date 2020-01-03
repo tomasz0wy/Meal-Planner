@@ -1,8 +1,6 @@
 package com.tkkd.mealplanner;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -17,10 +15,8 @@ import com.tkkd.mealplanner.Database.Entities.IngredientListForRecipe;
 import com.tkkd.mealplanner.Database.Entities.Measure;
 import com.tkkd.mealplanner.Database.Entities.ShoppingList;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 public class SingleRecipeRecyclerAdapter extends RecyclerView.Adapter<SingleRecipeRecyclerAdapter.ViewHolder> {
 
@@ -77,8 +73,9 @@ public class SingleRecipeRecyclerAdapter extends RecyclerView.Adapter<SingleReci
         boolean isEnough = false;
         HomeDAO.ATHome tester = new HomeDAO.ATHome();
         for(int i = 0;i < compareList.size();i++){
-            String afterConversion = MeasureConverter.convert(data.get(position).quantity,measure.mesName);
-            String compareQuantity = MeasureConverter.convert(compareList.get(i).quantity,compareList.get(i).measure);
+            Measure testMeasure = database.getMeasureDAO().getOneMeasureById(compareList.get(i).measure);
+            String afterConversion = MeasureConverter.convertToSmaller(data.get(position).quantity,measure.mesName);
+            String compareQuantity = MeasureConverter.convertToSmaller(compareList.get(i).quantity,testMeasure.mesName);
             int afterConversionInt = (int) Math.floor(Float.valueOf(afterConversion.substring(0,afterConversion.length()-2)));
             int compareQuantityInt = (int) Math.floor(Float.valueOf(compareQuantity.substring(0,compareQuantity.length()-2)));
             if(ingredient.ingName.equals(compareList.get(i).ingName)){
@@ -95,7 +92,7 @@ public class SingleRecipeRecyclerAdapter extends RecyclerView.Adapter<SingleReci
             ShoppingList shoppingList = new ShoppingList();
             shoppingList.ingredientId = data.get(position).ingredientId;
 
-            String afterConversion = MeasureConverter.convert(data.get(position).quantity,measure.mesName);
+            String afterConversion = MeasureConverter.convertToSmaller(data.get(position).quantity,measure.mesName);
             shoppingList.quantityShop = (int) Math.floor(Float.valueOf(afterConversion.substring(0,afterConversion.length()-2)));
 
             String afterConversionMes = afterConversion.substring(afterConversion.length()-2);
@@ -107,8 +104,9 @@ public class SingleRecipeRecyclerAdapter extends RecyclerView.Adapter<SingleReci
             }
         }else{
             if(!isEnough){
-                String afterConversion = MeasureConverter.convert(data.get(position).quantity,measure.mesName);
-                String compareQuantity = MeasureConverter.convert(tester.quantity,tester.measure);
+                Measure testMeasure = database.getMeasureDAO().getOneMeasureById(tester.measure);
+                String afterConversion = MeasureConverter.convertToSmaller(data.get(position).quantity,measure.mesName);
+                String compareQuantity = MeasureConverter.convertToSmaller(tester.quantity,testMeasure.mesName);
                 int afterConversionInt = (int) Math.floor(Float.valueOf(afterConversion.substring(0,afterConversion.length()-2)));
                 int compareQuantityInt = (int) Math.floor(Float.valueOf(compareQuantity.substring(0,compareQuantity.length()-2)));
                 int toInsert = afterConversionInt - compareQuantityInt;

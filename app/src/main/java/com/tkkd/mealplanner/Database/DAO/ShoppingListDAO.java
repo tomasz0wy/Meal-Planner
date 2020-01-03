@@ -1,6 +1,7 @@
 package com.tkkd.mealplanner.Database.DAO;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -17,6 +18,9 @@ public interface ShoppingListDAO {
 
     @Update
     void updateList(ShoppingList... shoppingLists);
+
+    @Delete
+    void removeList(ShoppingList... shoppingLists);
 
     @Query("SELECT * FROM shopping_list")
     List<ShoppingList> getShopList();

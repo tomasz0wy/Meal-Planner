@@ -36,13 +36,14 @@ public class Inserts {
         ingredientDAO.insertIngredient(ingredient);
     }
 
-    public static void insertHome(AppDatabase database, long ingId, float quantity, String expTime){
+    public static void insertHome(AppDatabase database, long ingId, float quantity, String expTime, long mesId){
         HomeDAO homeDAO = database.getHomeDAO();
         Home home = new Home();
         home.ingId = ingId;
         home.quantity = quantity;
         home.insertTime = new Date().getTime();
         home.expTime = expTime;
+        home.mesId = mesId;
         homeDAO.insertHome(home);
     }
 
@@ -107,9 +108,9 @@ public class Inserts {
         insertIngredient(database,"creme fraiche",2);
         insertIngredient(database,"mozzarella",3);
         insertIngredient(database,"parmesan",3);
-        insertHome(database,1,5,"29/12/19");
-        insertHome(database,2,3,"30/11/20");
-        insertHome(database,1,6,"29/11/20");
+        insertHome(database,1,5000,"05/01/20",3);
+        insertHome(database,2,3000,"08/01/20",3);
+        insertHome(database,1,6000,"29/11/20",3);
         insertRecipe(database,"Scrambled eggs","Perfect breakfast for everyone",
                 "1. Beat eggs, milk, salt and pepper in medium bowl until blended. \n\n" +
                         "2. Heat butter in large nonstick skillet over medium heat until hot. Pour" +
