@@ -60,14 +60,16 @@ public class AddATHomeActivity extends AppCompatActivity {
         ArrayAdapter<Measure> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,measureList);
         spinner.setAdapter(arrayAdapter);
 
+        checkBox = findViewById(R.id.is_new_checkbox);
+
         autoTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Ingredient ingredient = (Ingredient) adapterView.getItemAtPosition(i);
                 spinner.setSelection((int)ingredient.mesId - 1);
+                checkBox.setEnabled(false);
             }
         });
-        checkBox = findViewById(R.id.is_new_checkbox);
     }
 
     public void minus(View view) {

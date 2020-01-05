@@ -60,6 +60,10 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
         SimpleDateFormat sdf;
         Measure aTHomeMeasure = database.getMeasureDAO().getOneMeasureById(ATHomeList.get(position).measure);
 
+        String afterConversion = MeasureConverter.convertToBigger(ATHomeList.get(position).quantity,aTHomeMeasure.mesName);
+        float afterConversionFloat = Float.valueOf(afterConversion.substring(0,afterConversion.length()-2));
+        Measure afterConversionMes = database.getMeasureDAO().getOneMeasure(afterConversion.substring(afterConversion.length()-2).trim());
+
         if(ATHomeList.get(position).expTime.equals("")){
             expTimeLong = ATHomeList.get(position).insertTime + 7*86400000;
             expDate.setTime(expTimeLong);
@@ -94,11 +98,17 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
 
         long colorPicker = (test - test2);
 
+        if(afterConversionFloat == Math.floor(afterConversionFloat)){
+            int afterConversionInt = (int) afterConversionFloat;
+            quantity.setText(String.format(Locale.US,"%d",afterConversionInt));
+        }else {
+            quantity.setText(String.format(Locale.US,"%.1f",afterConversionFloat));
+        }
+
         //Set objects' display
         number.setText(String.format(Locale.US,"%d",position+1));
         name.setText(ingredient);
-        measure.setText(aTHomeMeasure.mesName);
-        quantity.setText(String.format(Locale.US,"%.1f",ATHomeList.get(position).quantity));
+        measure.setText(afterConversionMes.mesName);
         expTime.setText(sdf.format(expDate));
 
 

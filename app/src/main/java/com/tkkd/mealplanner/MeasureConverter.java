@@ -12,6 +12,16 @@ class MeasureConverter {
         }
     }
 
+    static String convertToBigger(float value, String mesName){
+        if(mesName.equals("ml")){
+            return convertFromMl(value);
+        }else if(mesName.equals("g")){
+            return convertFromGrams(value);
+        }else {
+            return value + "  ";
+        }
+    }
+
     private static String convertToMl(float value, String mesName){
         switch (mesName){
             case "l":
@@ -39,6 +49,24 @@ class MeasureConverter {
                 return value*5 + " g";
             default:
                 return 0 + " g";
+        }
+    }
+
+    private static String convertFromMl(float value){
+        if(value >= 1000){
+            float answer = value/1000;
+            return answer + " l";
+        }else{
+            return value + " ml";
+        }
+    }
+
+    private static String convertFromGrams(float value){
+        if(value >= 1000){
+            float answer = value/1000;
+            return answer + " kg";
+        }else{
+            return value + " g";
         }
     }
 }

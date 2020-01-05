@@ -27,4 +27,7 @@ public interface ShoppingListDAO {
 
     @Query("SELECT * FROM shopping_list WHERE ingredient_id = :ingId")
     ShoppingList getOneShopList(long ingId);
+
+    @Query("DELETE FROM shopping_list")
+    void nukeTable();
 }

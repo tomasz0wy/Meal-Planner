@@ -9,4 +9,10 @@
         <item name="android:textColor">#000</item>
     </style>
 
+    <style name="editTextItem">
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">15</item>
+    </style>
 </resources>

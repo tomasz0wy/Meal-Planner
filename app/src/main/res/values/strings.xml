@@ -29,4 +29,6 @@
     <string name="add_to_shop">Add missing ingredients to shopping list</string>
     <string name="shopping_list">Shopping list</string>
     <string name="end_shopping">End shopping</string>
+    <string name="clear_shop_list">Clear shopping list</string>
+    <string name="empty_shop_list">Shopping list is empty</string>
 </resources>

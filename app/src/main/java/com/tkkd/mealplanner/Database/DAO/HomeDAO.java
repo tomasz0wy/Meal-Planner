@@ -27,7 +27,7 @@ public interface HomeDAO {
     class ATHome{
         public String ingName;
         public long measure;
-        public float quantity;
+        public int quantity;
         public String expTime;
         public long insertTime;
     }

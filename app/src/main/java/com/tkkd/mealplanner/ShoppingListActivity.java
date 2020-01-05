@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tkkd.mealplanner.Database.AppDatabase;
 import com.tkkd.mealplanner.Database.Entities.ShoppingList;
@@ -32,6 +35,8 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         data = database.getShoppingListDAO().getShopList();
 
+        isEmpty();
+
         recyclerView = findViewById(R.id.shop_list_recycler);
         mAdapter = new ShoppingListRecyclerAdapter(data,database);
         layoutManager = new LinearLayoutManager(this);
@@ -57,5 +62,30 @@ public class ShoppingListActivity extends AppCompatActivity {
         mAdapter = new ShoppingListRecyclerAdapter(data,database);
         recyclerView.setAdapter(mAdapter);
         ShoppingListRecyclerAdapter.toInsertList.clear();
+        isEmpty();
+    }
+
+    public void delete(View view) {
+        database.getShoppingListDAO().nukeTable();
+        data = database.getShoppingListDAO().getShopList();
+        mAdapter = new ShoppingListRecyclerAdapter(data,database);
+        Toast.makeText(this,"Shopping list cleared",Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    public void isEmpty(){
+        if(database.getShoppingListDAO().getShopList().size() == 0){
+            TextView emptyShopList = findViewById(R.id.empty_shop_list);
+            emptyShopList.setVisibility(View.VISIBLE);
+            Button clearButton = findViewById(R.id.clear_shop_list_button);
+            clearButton.setEnabled(false);
+            clearButton.setAlpha(0.5f);
+        }else {
+            TextView emptyShopList = findViewById(R.id.empty_shop_list);
+            emptyShopList.setVisibility(View.INVISIBLE);
+            Button clearButton = findViewById(R.id.clear_shop_list_button);
+            clearButton.setEnabled(true);
+            clearButton.setAlpha(1);
+        }
     }
 }
