@@ -31,6 +31,7 @@ public class ShowATHomeActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private AppDatabase database;
     private List<HomeDAO.ATHome> data;
+    private ToggleButton sortButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class ShowATHomeActivity extends AppCompatActivity {
 
         isEmpty();
 
-        ToggleButton sortButton = findViewById(R.id.sort_button);
+        sortButton = findViewById(R.id.sort_button);
         sortButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {

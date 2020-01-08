@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tkkd.mealplanner.Database.AppDatabase;
 import com.tkkd.mealplanner.Database.DAO.HomeDAO;
 import com.tkkd.mealplanner.Database.Entities.Measure;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -62,7 +61,7 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
 
         String afterConversion = MeasureConverter.convertToBigger(ATHomeList.get(position).quantity,aTHomeMeasure.mesName);
         float afterConversionFloat = Float.valueOf(afterConversion.substring(0,afterConversion.length()-2));
-        Measure afterConversionMes = database.getMeasureDAO().getOneMeasure(afterConversion.substring(afterConversion.length()-2).trim());
+        Measure afterConversionMes = database.getMeasureDAO().getOneMeasure(afterConversion.substring(afterConversion.length()-3).trim());
 
         if(ATHomeList.get(position).expTime.equals("")){
             expTimeLong = ATHomeList.get(position).insertTime + 7*86400000;
@@ -95,7 +94,6 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
 
         long test = expDate.getTime();
         long test2 = new Date().getTime();
-
         long colorPicker = (test - test2);
 
         if(afterConversionFloat == Math.floor(afterConversionFloat)){
@@ -110,7 +108,6 @@ public class ShowATHomeRecyclerAdapter extends RecyclerView.Adapter<ShowATHomeRe
         name.setText(ingredient);
         measure.setText(afterConversionMes.mesName);
         expTime.setText(sdf.format(expDate));
-
 
         if(colorPicker <= -86400000){
             color.setBackgroundColor(Color.BLACK);

@@ -36,7 +36,7 @@ public class Inserts {
         ingredientDAO.insertIngredient(ingredient);
     }
 
-    public static void insertHome(AppDatabase database, long ingId, float quantity, String expTime, long mesId){
+    public static void insertHome(AppDatabase database, long ingId, int quantity, String expTime, long mesId){
         HomeDAO homeDAO = database.getHomeDAO();
         Home home = new Home();
         home.ingId = ingId;

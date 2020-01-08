@@ -18,7 +18,7 @@ class MeasureConverter {
         }else if(mesName.equals("g")){
             return convertFromGrams(value);
         }else {
-            return value + "  ";
+            return value + "   ";
         }
     }
 
@@ -55,7 +55,7 @@ class MeasureConverter {
     private static String convertFromMl(float value){
         if(value >= 1000){
             float answer = value/1000;
-            return answer + " l";
+            return answer + "  l";
         }else{
             return value + " ml";
         }
@@ -66,7 +66,7 @@ class MeasureConverter {
             float answer = value/1000;
             return answer + " kg";
         }else{
-            return value + " g";
+            return value + "  g";
         }
     }
 }

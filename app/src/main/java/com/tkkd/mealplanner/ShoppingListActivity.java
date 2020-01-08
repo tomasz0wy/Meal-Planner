@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.tkkd.mealplanner.Database.AppDatabase;
 import com.tkkd.mealplanner.Database.Entities.ShoppingList;
 import com.tkkd.mealplanner.Database.Inserts;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
@@ -55,7 +57,11 @@ public class ShoppingListActivity extends AppCompatActivity {
         toInsert = ShoppingListRecyclerAdapter.toInsertList;
         for (int i = 0; i < toInsert.size();i++){
             ShoppingList list = toInsert.get(i);
-            Inserts.insertHome(database,list.ingredientId,list.quantityShop,"29/12/19",list.mesId);
+            Date expDate = new Date();
+            expDate.setTime(expDate.getTime() + 7 * 86400000);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy",Locale.US);
+            String toInsertDate = sdf.format(expDate);
+            Inserts.insertHome(database,list.ingredientId,list.quantityShop,toInsertDate,list.mesId);
             database.getShoppingListDAO().removeList(list);
         }
         data = database.getShoppingListDAO().getShopList();
